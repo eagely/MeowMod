@@ -1,5 +1,6 @@
 package me.mlg.rat;
 
+import me.mlg.rat.commands.DebugCommand;
 import me.mlg.rat.commands.ReloadConfigCommand;
 import me.mlg.rat.commands.SetPosition;
 import me.mlg.rat.commands.ToggleCommand;
@@ -29,6 +30,7 @@ public class RatAddons {
         ClientCommandHandler.instance.registerCommand(new SetPosition());
         ClientCommandHandler.instance.registerCommand(new ToggleCommand());
         ClientCommandHandler.instance.registerCommand(new ReloadConfigCommand());
+        ClientCommandHandler.instance.registerCommand(new DebugCommand());
     }
     @EventHandler
     public void init(FMLInitializationEvent event)
@@ -38,6 +40,7 @@ public class RatAddons {
         FMLCommonHandler.instance().bus().register(new GreetGuild());
         FMLCommonHandler.instance().bus().register(new MessageResponder());
         FMLCommonHandler.instance().bus().register(new WatcherDisplay());
+        FMLCommonHandler.instance().bus().register(new Default());
 
         ConfigHandler.reloadConfig();
         }
