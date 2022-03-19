@@ -13,7 +13,7 @@ public class MessageResponder {
     public void onChat(ClientChatReceivedEvent event) {
         ToggleCommand.responderToggle = ConfigHandler.getBoolean("toggle", "responder");
         String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
-        if(message.startsWith("Guild > ") || message.startsWith("Party > ") && ToggleCommand.responderToggle) {
+        if(message.startsWith("Guild > ") && ToggleCommand.responderToggle || message.startsWith("Party > ") && ToggleCommand.responderToggle) {
             if (message.toLowerCase().contains("@smiler"))
                 Minecraft.getMinecraft().thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + ":)");
             else if (message.toLowerCase().contains("@truer"))
