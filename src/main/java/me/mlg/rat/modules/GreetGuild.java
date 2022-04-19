@@ -1,6 +1,6 @@
 package me.mlg.rat.modules;
 
-import me.mlg.rat.commands.ToggleCommand;
+import me.mlg.rat.RatAddons;
 import me.mlg.rat.handlers.ConfigHandler;
 import me.mlg.rat.utils.Utils;
 import net.minecraft.util.StringUtils;
@@ -15,13 +15,17 @@ public class GreetGuild {
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
-        String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
-        if (message.startsWith("Guild > ") && message.endsWith("joined.") && !message.contains(":") && ToggleCommand.greetToggle) {
-            String username = message.split(" ", 0)[2];
-            if (ConfigHandler.initInt("lastseen", username, 111970) != date) {
-                Utils.mc.thePlayer.sendChatMessage("/gc Good morning " + username);
-                date = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("dMy")));
-                ConfigHandler.writeIntConfig("lastseen", username, date);
+        if(RatAddons.greetToggle) {
+            String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
+            if(message.contains(": "))
+                return;
+            if (message.startsWith("Guild > ") && message.endsWith("joined.")) {
+                String username = message.split(" ", 0)[2];
+                if (ConfigHandler.initInt("lastseen", username, 111970) != date) {
+                    Utils.mc.thePlayer.sendChatMessage("/gc Good morning " + username);
+                    date = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("dMy")));
+                    ConfigHandler.writeIntConfig("lastseen", username, date);
+                }
             }
         }
     }

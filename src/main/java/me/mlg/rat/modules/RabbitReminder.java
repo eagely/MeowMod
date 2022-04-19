@@ -2,8 +2,6 @@ package me.mlg.rat.modules;
 
 import me.mlg.rat.RatAddons;
 import me.mlg.rat.utils.Utils;
-import me.mlg.rat.commands.ToggleCommand;
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -18,21 +16,21 @@ public class RabbitReminder {
     private static boolean draw;
 
     @SubscribeEvent
-    public void onTick(TickEvent event) {
+    public void onTick(TickEvent.ClientTickEvent event) {
         tickSinceCleared++;
-        if(isCleared && tickSinceCleared > Utils.chatDelay) {
-            Minecraft.getMinecraft().thePlayer.sendChatMessage("/pc Rabbit Hat");
+        if(isCleared && tickSinceCleared > Utils.hypixelChatDelayTick) {
             isCleared = false;
         }
     }
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
-        if(ToggleCommand.rabbitToggle) {
+        if(RatAddons.rabbitToggle) {
             String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
-            if (message.equals("[BOSS] The Watcher: That will be enough for now.")) {
-                if(!ToggleCommand.watcherToggle)
-                    Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, (float) 0.5);
+            if (message.equals("[BOSS] The Watcher: You have proven yourself. You may pass.")) {
+                if(!RatAddons.watcherToggle)
+                    Utils.mc.thePlayer.playSound("random.orb", 1, (float) 0.5);
+                Utils.mc.thePlayer.sendChatMessage("/pc Rabbit Hat");
                 isCleared = true;
                 draw = true;
                 tickSinceCleared = 0;
@@ -43,8 +41,8 @@ public class RabbitReminder {
     @SubscribeEvent
     public void renderOverlay(RenderGameOverlayEvent event) {
         if(draw) {
-            Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow("Rabbit Hat", x, y, 0xFF0000);
-            if(tickSinceCleared >= RatAddons.defaultDisplayTimeTick) {
+            Utils.mc.fontRendererObj.drawStringWithShadow("Rabbit Hat", x, y, 0xFF0000);
+            if(tickSinceCleared >= Utils.defaultDisplayTimeTick) {
                 draw = false;
                 tickSinceCleared = 0;
             }

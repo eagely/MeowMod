@@ -1,7 +1,6 @@
 package me.mlg.rat.handlers;
 
 import me.mlg.rat.RatAddons;
-import me.mlg.rat.commands.ToggleCommand;
 import me.mlg.rat.modules.RabbitReminder;
 import me.mlg.rat.modules.WatcherDisplay;
 import net.minecraftforge.common.config.ConfigCategory;
@@ -206,15 +205,15 @@ public class ConfigHandler {
     }
 
     public static void reloadConfig() {
-        ToggleCommand.rabbitToggle = initBoolean("toggle", "rabbit", false);
-        ToggleCommand.responderToggle = initBoolean("toggle", "responder", false);
-        ToggleCommand.greetToggle = initBoolean("toggle", "greet", false);
-        ToggleCommand.watcherToggle = initBoolean("toggle", "watcher", false);
+        RatAddons.copyLatestToggle = initBoolean("toggle", "copyraredrops", false);
+        RatAddons.copyRareDropsToggle = initBoolean("toggle", "copyraredrops", false);
+        RatAddons.greetToggle = initBoolean("toggle", "greet", false);
+        RatAddons.rabbitToggle = initBoolean("toggle", "rabbit", false);
+        RatAddons.responderToggle = initBoolean("toggle", "responder", false);
+        RatAddons.watcherToggle = initBoolean("toggle", "watcher", false);
         RabbitReminder.x = initInt("position", "rabbit-x", 5);
         RabbitReminder.y = initInt("position", "rabbit-y", 5);
         WatcherDisplay.x = initInt("position", "watcher-x", 5);
         WatcherDisplay.y = initInt("position", "watcher-y", 5);
-        RatAddons.defaultDisplayTimeTick = initInt("default", "displayTime", 100);
-        RatAddons.defaultDisplayTimeSecond = initInt("default", "displayTime", 5);
     }
 }
