@@ -1,8 +1,7 @@
 package me.mlg.rat.modules;
 
 import me.mlg.rat.RatAddons;
-import me.mlg.rat.commands.ToggleCommand;
-import net.minecraft.client.Minecraft;
+import me.mlg.rat.utils.Utils;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -22,11 +21,11 @@ public class WatcherDisplay {
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
-        if(ToggleCommand.watcherToggle) {
+        if(RatAddons.watcherToggle) {
             String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
-            if (message.equals("[BOSS] The Watcher: That will be enough for now.")) {
-                if(!ToggleCommand.rabbitToggle)
-                    Minecraft.getMinecraft().thePlayer.playSound("random.orb", 1, (float) 0.5);
+            if (message.equals("[BOSS] The Watcher: You have proven yourself. You may pass.")) {
+                if(!RatAddons.rabbitToggle)
+                    Utils.mc.thePlayer.playSound("random.orb", 1, (float) 0.5);
                 draw = true;
                 tickSinceCleared = 0;
             }
@@ -36,8 +35,8 @@ public class WatcherDisplay {
     @SubscribeEvent
     public void renderOverlay(RenderGameOverlayEvent event) {
         if(draw) {
-            Minecraft.getMinecraft().fontRendererObj.drawStringWithShadow("Watcher Cleared", x, y, 0xFF0000);
-            if(tickSinceCleared >= RatAddons.defaultDisplayTimeTick) {
+            Utils.mc.fontRendererObj.drawStringWithShadow("Watcher Cleared", x, y, 0xFF0000);
+            if(tickSinceCleared >= Utils.defaultDisplayTimeTick) {
                 draw = false;
                 tickSinceCleared = 0;
             }
