@@ -7,7 +7,7 @@ import net.minecraft.util.StringUtils;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 public class MessageResponder {
-
+//0.3 removed hosted is a shitter & i love m7 <3
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
         RatAddons.responderToggle = ConfigHandler.getBoolean("toggle", "responder");
@@ -21,12 +21,8 @@ public class MessageResponder {
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + ":(");
             else if (message.toLowerCase().contains("@samer"))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "Same!");
-            else if (message.toLowerCase().contains("m7") && !message.contains("I love m7 <3"))
-                Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "I love m7 <3");
             else if (message.toLowerCase().contains("i hate bingo"))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "I love bingo <3");
-            else if (message.contains("Hosted") && !message.contains("Hosted is a shitter") && !message.contains("] Hosted: "))
-                Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "Hosted is a shitter");
             else if (message.contains("BennettArthur") && !message.contains("BennettArthur is my favorite mage") && !message.contains("] BennettArthur: "))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "BennettArthur is my favorite mage <3");
             else if (message.toLowerCase().contains("shut up"))

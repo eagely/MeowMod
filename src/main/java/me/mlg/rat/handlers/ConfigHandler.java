@@ -1,6 +1,7 @@
 package me.mlg.rat.handlers;
 
 import me.mlg.rat.RatAddons;
+import me.mlg.rat.modules.LavaFishingLoot;
 import me.mlg.rat.modules.RabbitReminder;
 import me.mlg.rat.modules.WatcherDisplay;
 import net.minecraftforge.common.config.ConfigCategory;
@@ -208,9 +209,23 @@ public class ConfigHandler {
         RatAddons.copyLatestToggle = initBoolean("toggle", "copyraredrops", false);
         RatAddons.copyRareDropsToggle = initBoolean("toggle", "copyraredrops", false);
         RatAddons.greetToggle = initBoolean("toggle", "greet", false);
+        RatAddons.lavaFishingLootToggle = initBoolean("toggle", "lavafishingloot", false);
+        RatAddons.nicePbToggle = initBoolean("toggle", "nicepb", false);
         RatAddons.rabbitToggle = initBoolean("toggle", "rabbit", false);
         RatAddons.responderToggle = initBoolean("toggle", "responder", false);
+        RatAddons.seaCreatureKillTimerToggle = initBoolean("toggle", "seacreaturekilltimer", false);
+        RatAddons.seaCreatureLastHitToggle = initBoolean("toggle", "seacreaturelasthit", false);
         RatAddons.watcherToggle = initBoolean("toggle", "watcher", false);
+        LavaFishingLoot.lavaLeechCounter = initInt("tracker", "lavaleech", 0);
+        LavaFishingLoot.moogmaCounter = initInt("tracker", "moogma", 0);
+        LavaFishingLoot.lavaFlameCounter = initInt("tracker", "lavaflame", 0);
+        LavaFishingLoot.magmaSlugCounter = initInt("tracker", "magmaslug", 0);
+        LavaFishingLoot.pyroclasticWormCounter = initInt("tracker", "pyroclasticworm", 0);
+        LavaFishingLoot.fireEelCounter = initInt("tracker", "fireeel", 0);
+        LavaFishingLoot.taurusCounter = initInt("tracker", "taurus", 0);
+        LavaFishingLoot.thunderCounter = initInt("tracker", "thunder", 0);
+        LavaFishingLoot.lordJawbusCounter = initInt("tracker", "lordjawbus", 0);
+        LavaFishingLoot.vanquisherCounter = initInt("tracker", "vanquisher", 0);
         RabbitReminder.x = initInt("position", "rabbit-x", 5);
         RabbitReminder.y = initInt("position", "rabbit-y", 5);
         WatcherDisplay.x = initInt("position", "watcher-x", 5);
