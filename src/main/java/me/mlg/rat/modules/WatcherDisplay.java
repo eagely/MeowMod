@@ -22,6 +22,8 @@ public class WatcherDisplay {
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
         if(RatAddons.watcherToggle) {
+            if(event.type != 2)
+                return;
             String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
             if (message.equals("[BOSS] The Watcher: You have proven yourself. You may pass.")) {
                 if(!RatAddons.rabbitToggle)

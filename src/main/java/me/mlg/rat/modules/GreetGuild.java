@@ -11,20 +11,19 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class GreetGuild {
-    int date = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("dMy")));
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
         if(RatAddons.greetToggle) {
             String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
-            if(message.contains(": "))
+            if(message.contains(":") || event.type != 2)
                 return;
             if (message.startsWith("Guild > ") && message.endsWith("joined.")) {
                 String username = message.split(" ", 0)[2];
-                if (ConfigHandler.initInt("lastseen", username, 111970) != date) {
+                RatAddons.currentDate = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("dMy")));
+                if (ConfigHandler.initInt("lastseen", username, 0) != RatAddons.currentDate) {
                     Utils.mc.thePlayer.sendChatMessage("/gc Good morning " + username);
-                    date = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("dMy")));
-                    ConfigHandler.writeIntConfig("lastseen", username, date);
+                    ConfigHandler.writeIntConfig("lastseen", username, RatAddons.currentDate);
                 }
             }
         }

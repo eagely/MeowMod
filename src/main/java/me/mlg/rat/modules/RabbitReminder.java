@@ -8,30 +8,29 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 
+//0.3: removed isCleared, useless bool since 5s delay was removed
+
 public class RabbitReminder {
     public static int x;
     public static int y;
     private static int tickSinceCleared = 0;
-    private static boolean isCleared;
     private static boolean draw;
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         tickSinceCleared++;
-        if(isCleared && tickSinceCleared > Utils.hypixelChatDelayTick) {
-            isCleared = false;
-        }
     }
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
         if(RatAddons.rabbitToggle) {
+            if(event.type != 2)
+                return;
             String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
             if (message.equals("[BOSS] The Watcher: You have proven yourself. You may pass.")) {
                 if(!RatAddons.watcherToggle)
                     Utils.mc.thePlayer.playSound("random.orb", 1, (float) 0.5);
                 Utils.mc.thePlayer.sendChatMessage("/pc Rabbit Hat");
-                isCleared = true;
                 draw = true;
                 tickSinceCleared = 0;
             }

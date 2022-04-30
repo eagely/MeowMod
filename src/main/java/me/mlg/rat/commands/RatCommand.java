@@ -75,6 +75,16 @@ public class RatCommand extends CommandBase {
                         ConfigHandler.writeBooleanConfig("toggle", "greet", RatAddons.greetToggle);
                         Utils.printRatMessage("Toggled Greet to " + RatAddons.greetToggle);
                         break;
+                    case "lavafishingloot":
+                        RatAddons.lavaFishingLootToggle = !RatAddons.lavaFishingLootToggle;
+                        ConfigHandler.writeBooleanConfig("toggle", "lavafishingloot", RatAddons.lavaFishingLootToggle);
+                        Utils.printRatMessage("Toggle Lava Fishiing Loot Tracker to " + RatAddons.lavaFishingLootToggle);
+                        break;
+                    case "nicepb":
+                        RatAddons.nicePbToggle = !RatAddons.nicePbToggle;
+                        ConfigHandler.writeBooleanConfig("toggle", "nicepb", RatAddons.nicePbToggle);
+                        Utils.printRatMessage("Toggled Auto nice pb to " + RatAddons.nicePbToggle);
+                        break;
                     case "rabbit":
                         RatAddons.rabbitToggle = !RatAddons.rabbitToggle;
                         ConfigHandler.writeBooleanConfig("toggle", "rabbit", RatAddons.rabbitToggle);
@@ -85,16 +95,22 @@ public class RatCommand extends CommandBase {
                         ConfigHandler.writeBooleanConfig("toggle", "responder", RatAddons.responderToggle);
                         Utils.printRatMessage("Toggled Responder to " + RatAddons.responderToggle);
                         break;
+                    case "seacreaturekilltimer":
+                        RatAddons.seaCreatureKillTimerToggle = !RatAddons.seaCreatureKillTimerToggle;
+                        ConfigHandler.writeBooleanConfig("toggle", "seacreaturekilltimer", RatAddons.seaCreatureKillTimerToggle);
+                        Utils.printRatMessage("Toggled Sea Creature Kill timer to " + RatAddons.seaCreatureKillTimerToggle);
+                        break;
+                    case "seacreaturelasthit":
+                        RatAddons.seaCreatureLastHitToggle = !RatAddons.seaCreatureLastHitToggle;
+                        ConfigHandler.writeBooleanConfig("toggle", "seacreaturelasthit", RatAddons.seaCreatureLastHitToggle);
+                        Utils.printRatMessage("Toggled Sea Creature Last Hit to " + RatAddons.seaCreatureLastHitToggle);
+                        break;
                     case "watcher":
                         RatAddons.responderToggle = !RatAddons.responderToggle;
                         ConfigHandler.writeBooleanConfig("toggle", "watcher", RatAddons.watcherToggle);
                         Utils.printRatMessage("Toggled Watcher to " + RatAddons.watcherToggle);
                         break;
-                    default:
-                        Utils.printRatMessage("Usage: /" + getCommandUsage(sender));
                 }
-            default:
-                Utils.printRatMessage("Usage: /" + getCommandUsage(sender));
         }
     }
 }

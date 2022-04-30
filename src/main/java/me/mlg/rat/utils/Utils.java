@@ -19,22 +19,6 @@ public class Utils {
         mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "[RAT] " + EnumChatFormatting.GREEN + message));
     }
 
-    public static String tickAsSecond(int tick) {
-        return Integer.toString(tick / 20);
-    }
-
-    public static String tickAsMinute(int tick) {
-        return Integer.toString(tick / 1200) + ":" + Integer.toString(tick / 20 % 60);
-    }
-
-    public static String tickAsHour(int tick) {
-        return Integer.toString(tick / 72000) + ":" + Integer.toString(tick / 1200 % 60) + ":" + Integer.toString(tick / 20 % 60);
-    }
-
-    public static String tickAsDay(int tick) {
-        return Integer.toString(tick / 20 / 86400) + ":" + Integer.toString(tick / 72000 % 60) + ":" + Integer.toString(tick / 1200 % 60) + ":" + Integer.toString(tick / 20 % 60);
-    }
-
     public static boolean isOnHypixel() {
         if(mc != null && mc.theWorld != null && !mc.isSingleplayer())
             return mc.getCurrentServerData().serverIP.toLowerCase().contains("hypixel");
