@@ -28,7 +28,6 @@ public class LavaFishingLoot {
         switch(message) {
             case "A small but fearsome Lava Leech emerges.":
                 ConfigHandler.writeIntConfig("tracker", "lavaleech", ++lavaLeechCounter);
-                Utils.printRatMessage("debug" + lavaLeechCounter);
                 break;
             case "You hear a faint Moo from the lava... A Moogma appears.":
                 ConfigHandler.writeIntConfig("tracker", "moogma", ++moogmaCounter);
