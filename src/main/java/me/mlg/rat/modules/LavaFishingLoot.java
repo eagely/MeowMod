@@ -9,55 +9,54 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class LavaFishingLoot {
-    public static int lavaLeechCounter;
-    public static int moogmaCounter;
-    public static int lavaFlameCounter;
-    public static int magmaSlugCounter;
-    public static int pyroclasticWormCounter;
-    public static int fireEelCounter;
-    public static int taurusCounter;
-    public static int thunderCounter;
-    public static int lordJawbusCounter;
-    public static int vanquisherCounter;
+    public static int lavaLeechCounter = ConfigHandler.getInt("tracker", "lavaleech");
+    public static int moogmaCounter = ConfigHandler.getInt("tracker", "moogma");
+    public static int lavaFlameCounter = ConfigHandler.getInt("tracker", "lavaflame");
+    public static int magmaSlugCounter = ConfigHandler.getInt("tracker", "magmaslug");
+    public static int pyroclasticWormCounter = ConfigHandler.getInt("tracker", "pyroclasticworm");
+    public static int fireEelCounter = ConfigHandler.getInt("tracker", "fireeel");
+    public static int taurusCounter = ConfigHandler.getInt("tracker", "tauruscounter");
+    public static int thunderCounter = ConfigHandler.getInt("tracker", "thunder");
+    public static int lordJawbusCounter = ConfigHandler.getInt("tracker", "lordjawbus");
+    public static int vanquisherCounter = ConfigHandler.getInt("tracker", "vanquisher");
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
-        if(event.type != 2)
-            return;
         String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
         if(message.contains(":"))
             return;
         switch(message) {
             case "A small but fearsome Lava Leech emerges.":
-                lavaLeechCounter++;
-                ConfigHandler.writeIntConfig("tracker", "lavaleech", lavaLeechCounter);
+                ConfigHandler.writeIntConfig("tracker", "lavaleech", ++lavaLeechCounter);
+                Utils.printRatMessage("debug" + lavaLeechCounter);
+                break;
             case "You hear a faint Moo from the lava... A Moogma appears.":
-                moogmaCounter++;
-                ConfigHandler.writeIntConfig("tracker", "moogma", moogmaCounter);
+                ConfigHandler.writeIntConfig("tracker", "moogma", ++moogmaCounter);
+                break;
             case "A Lava Flame flies out from beneath the lava.":
-                lavaFlameCounter++;
-                ConfigHandler.writeIntConfig("tracker", "lavaflame", lavaFlameCounter);
+                ConfigHandler.writeIntConfig("tracker", "lavaflame", ++lavaFlameCounter);
+                break;
             case "From beneath the lava appears a Magma Slug.":
-                magmaSlugCounter++;
-                ConfigHandler.writeIntConfig("tracker", "magmaslug", magmaSlugCounter);
+                ConfigHandler.writeIntConfig("tracker", "magmaslug", ++magmaSlugCounter);
+                break;
             case "You feel the heat radiating as a Pyroclastic Worm surfaces.":
-                pyroclasticWormCounter++;
-                ConfigHandler.writeIntConfig("tracker", "pyroclastic", pyroclasticWormCounter);
+                ConfigHandler.writeIntConfig("tracker", "pyroclastic", ++pyroclasticWormCounter);
+                break;
             case "A Fire Eel slithers out from the depths.":
-                fireEelCounter++;
-                ConfigHandler.writeIntConfig("tracker", "fireeel", fireEelCounter);
+                ConfigHandler.writeIntConfig("tracker", "fireeel", ++fireEelCounter);
+                break;
             case "Taurus and his steed emerge.":
-                taurusCounter++;
-                ConfigHandler.writeIntConfig("tracker", "taurus", taurusCounter);
+                ConfigHandler.writeIntConfig("tracker", "taurus", ++taurusCounter);
+                break;
             case "You hear a massive rumble as Thunder emerges.":
-                thunderCounter++;
-                ConfigHandler.writeIntConfig("tracker", "thunder", thunderCounter);
+                ConfigHandler.writeIntConfig("tracker", "thunder", ++thunderCounter);
+                break;
             case "You have angered a legendary creature... Lord Jawbus has arrived":
-                lordJawbusCounter++;
-                ConfigHandler.writeIntConfig("tracker", "lordjawbus", lordJawbusCounter);
+                ConfigHandler.writeIntConfig("tracker", "lordjawbus", ++lordJawbusCounter);
+                break;
             case "A Vanquisher is spawning nearby!":
-                vanquisherCounter++;
-                ConfigHandler.writeIntConfig("tracker", "", vanquisherCounter);
+                ConfigHandler.writeIntConfig("tracker", "vanquisher", ++vanquisherCounter);
+                break;
             default:
                 break;
         }
