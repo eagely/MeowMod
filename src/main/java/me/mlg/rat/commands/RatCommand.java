@@ -1,12 +1,15 @@
 package me.mlg.rat.commands;
 
+import me.mlg.rat.handlers.GUIHandler;
 import me.mlg.rat.RatAddons;
 import me.mlg.rat.handlers.ConfigHandler;
+import me.mlg.rat.modules.Timer;
 import me.mlg.rat.utils.Utils;
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 
+//0.3 added breaks to switch case
 public class RatCommand extends CommandBase {
     @Override
     public String getCommandName() {
@@ -34,10 +37,12 @@ public class RatCommand extends CommandBase {
         switch (args[0].toLowerCase()) {
             case "help":
                 Utils.printRatMessage("Usage: /" + getCommandUsage(sender));
+                break;
 
             case "reload":
                 ConfigHandler.reloadConfig();
                 Utils.printRatMessage("Successfully reloaded Config!");
+                break;
 
             case "setpos":
                 int x;
@@ -55,21 +60,45 @@ public class RatCommand extends CommandBase {
                     Utils.printRatMessage("Set Position of Rabbit Reminder to x " + args[2] + " y " + args[3]);
                 else if (args[1].equals("watcher"))
                     Utils.printRatMessage("Set Position of Watcher Display to x " + args[2] + " y " + args[3]);
+                else if (args[1].equals("lavafishingloot"))
+                    Utils.printRatMessage("Set Position of Lava Fishing Loot Tracker to x " + args[2] + " y " + args[3]);
                 else {
                     Utils.printErrorMessage("Invalid Module Name");
                     return;
                 }
+                break;
 
+            case "timer":
+                switch (args[1].toLowerCase()) {
+                    case "start":
+                        try {
+                            Timer.tick = Integer.parseInt(args[2]);
+                        } catch (IllegalArgumentException exception) {
+                            Utils.printErrorMessage("Illegal Argument");
+                            break;
+                        }
+                        Utils.printRatMessage("Started Timer of " + Timer.tick + "s");
+                        break;
+                    case "reset":
+
+                }
             case "toggle":
                 switch (args[1].toLowerCase()) {
                     case "copylatest":
                         RatAddons.copyLatestToggle = !RatAddons.copyLatestToggle;
                         ConfigHandler.writeBooleanConfig("toggle", "copylatest", RatAddons.copyLatestToggle);
                         Utils.printRatMessage("Toggled Copy Latest to " + RatAddons.copyLatestToggle);
+                        break;
                     case "copyraredrops":
                         RatAddons.copyRareDropsToggle = !RatAddons.copyRareDropsToggle;
                         ConfigHandler.writeBooleanConfig("toggle", "copyraredrops", RatAddons.copyRareDropsToggle);
                         Utils.printRatMessage("Toggled Copy Rare Drops to " + RatAddons.copyRareDropsToggle);
+                        break;
+                    case "debug":
+                        RatAddons.debugToggle = !RatAddons.debugToggle;
+                        ConfigHandler.writeBooleanConfig("toggle", "debug", RatAddons.debugToggle);
+                        Utils.printRatMessage("Toggled Debug to " + RatAddons.debugToggle);
+                        break;
                     case "greet":
                         RatAddons.greetToggle = !RatAddons.greetToggle;
                         ConfigHandler.writeBooleanConfig("toggle", "greet", RatAddons.greetToggle);
@@ -85,10 +114,10 @@ public class RatCommand extends CommandBase {
                         ConfigHandler.writeBooleanConfig("toggle", "nicepb", RatAddons.nicePbToggle);
                         Utils.printRatMessage("Toggled Auto nice pb to " + RatAddons.nicePbToggle);
                         break;
-                    case "rabbit":
-                        RatAddons.rabbitToggle = !RatAddons.rabbitToggle;
-                        ConfigHandler.writeBooleanConfig("toggle", "rabbit", RatAddons.rabbitToggle);
-                        Utils.printRatMessage("Toggled Rabbit to " + RatAddons.rabbitToggle);
+                    case "overflowskilldisplay":
+                        RatAddons.overflowSkillDislayToggle = !RatAddons.overflowSkillDislayToggle;
+                        ConfigHandler.writeBooleanConfig("toggle", "overflowskilldisplay", RatAddons.overflowSkillDislayToggle);
+                        Utils.printRatMessage("Toggled overflowskilldisplay to " + RatAddons.overflowSkillDislayToggle);
                         break;
                     case "responder":
                         RatAddons.responderToggle = !RatAddons.responderToggle;
@@ -110,7 +139,14 @@ public class RatCommand extends CommandBase {
                         ConfigHandler.writeBooleanConfig("toggle", "watcher", RatAddons.watcherToggle);
                         Utils.printRatMessage("Toggled Watcher to " + RatAddons.watcherToggle);
                         break;
+                    default:
+                        Utils.printErrorMessage("Invalid module name");
+                        break;
                 }
+                break;
+            default:
+                GUIHandler.open();
+                break;
         }
     }
 }

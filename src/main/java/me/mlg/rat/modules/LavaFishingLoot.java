@@ -9,6 +9,9 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 
 public class LavaFishingLoot {
+    public static int x;
+    public static int y;
+
     public static int lavaLeechCounter = ConfigHandler.getInt("tracker", "lavaleech");
     public static int moogmaCounter = ConfigHandler.getInt("tracker", "moogma");
     public static int lavaFlameCounter = ConfigHandler.getInt("tracker", "lavaflame");
@@ -64,16 +67,16 @@ public class LavaFishingLoot {
     @SubscribeEvent
     public void renderOverlay(RenderGameOverlayEvent event) {
         if(RatAddons.lavaFishingLootToggle) {
-            Utils.mc.fontRendererObj.drawStringWithShadow("Lava Leech: " + lavaLeechCounter, 0, 0, 0xFFFFFF);
-            Utils.mc.fontRendererObj.drawStringWithShadow("Moogma: " + moogmaCounter, 0, 10, 0xFFFFFF);
-            Utils.mc.fontRendererObj.drawStringWithShadow("Lava Flame: " + lavaFlameCounter, 0, 20, 0xFFFFFF);
-            Utils.mc.fontRendererObj.drawStringWithShadow("Magma Slug: " + magmaSlugCounter, 0, 30, 0xFFFFFF);
-            Utils.mc.fontRendererObj.drawStringWithShadow("Pyroclastic Worm: " + pyroclasticWormCounter, 0, 40, 0xFFFFFF);
-            Utils.mc.fontRendererObj.drawStringWithShadow("Fire Eel: " + fireEelCounter, 0, 50, 0xFFFFFF);
-            Utils.mc.fontRendererObj.drawStringWithShadow("Taurus: " + taurusCounter, 0, 60, 0xFFFFFF);
-            Utils.mc.fontRendererObj.drawStringWithShadow("Thunder: " + thunderCounter, 0, 70, 0xFFFFFF);
-            Utils.mc.fontRendererObj.drawStringWithShadow("Lord Jawbussy: " + lordJawbusCounter, 0, 80, 0xFFFFFF);
-            Utils.mc.fontRendererObj.drawStringWithShadow("Vanquisher: " + vanquisherCounter, 0, 90, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Lava Leech: " + lavaLeechCounter, x, y, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Moogma: " + moogmaCounter, x, 10 + y, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Lava Flame: " + lavaFlameCounter, x, 20 + y, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Magma Slug: " + magmaSlugCounter, x, 30 + y, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Pyroclastic Worm: " + pyroclasticWormCounter, x, 40 + y, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Fire Eel: " + fireEelCounter, x, 50 + y, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Taurus: " + taurusCounter, x, 60 + y, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Thunder: " + thunderCounter, x, 70 + y, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Lord Jawbussy: " + lordJawbusCounter, x, 80 + y, 0xFFFFFF);
+            Utils.mc.fontRendererObj.drawStringWithShadow("Vanquisher: " + vanquisherCounter, x, 90 + y, 0xFFFFFF);
 
         }
     }

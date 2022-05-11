@@ -25,6 +25,7 @@ public class SeaCreatureAddons {
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
         String message = StringUtils.stripControlCodes(event.message.getUnformattedText());
+        if(message.contains(":")) return;
         if(message.equals("You hear a massive rumble as Thunder emerges."))
             isThunder = true;
         else if(message.equals("You have angered a legendary creature... Lord Jawbus has arrived"))
