@@ -12,16 +12,16 @@ public class LavaFishingLoot {
     public static int x;
     public static int y;
 
-    public static int lavaLeechCounter = ConfigHandler.getInt("tracker", "lavaleech");
-    public static int moogmaCounter = ConfigHandler.getInt("tracker", "moogma");
-    public static int lavaFlameCounter = ConfigHandler.getInt("tracker", "lavaflame");
-    public static int magmaSlugCounter = ConfigHandler.getInt("tracker", "magmaslug");
-    public static int pyroclasticWormCounter = ConfigHandler.getInt("tracker", "pyroclasticworm");
-    public static int fireEelCounter = ConfigHandler.getInt("tracker", "fireeel");
-    public static int taurusCounter = ConfigHandler.getInt("tracker", "tauruscounter");
-    public static int thunderCounter = ConfigHandler.getInt("tracker", "thunder");
-    public static int lordJawbusCounter = ConfigHandler.getInt("tracker", "lordjawbus");
-    public static int vanquisherCounter = ConfigHandler.getInt("tracker", "vanquisher");
+    public static int lavaLeechCounter;
+    public static int moogmaCounter;
+    public static int lavaFlameCounter;
+    public static int magmaSlugCounter;
+    public static int pyroclasticWormCounter;
+    public static int fireEelCounter;
+    public static int taurusCounter;
+    public static int thunderCounter;
+    public static int lordJawbusCounter;
+    public static int vanquisherCounter;
 
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {

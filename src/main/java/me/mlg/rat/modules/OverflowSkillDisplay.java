@@ -7,6 +7,7 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.StringUtils;
 import net.minecraftforge.client.event.ClientChatReceivedEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+//p0.4 this doesnt even work idk why
 public class OverflowSkillDisplay {
 
     @SubscribeEvent

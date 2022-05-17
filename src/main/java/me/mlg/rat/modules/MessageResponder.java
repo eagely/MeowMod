@@ -14,6 +14,7 @@ public class MessageResponder {
 
     private int tick = 0;
     private boolean send;
+
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if(send)
@@ -31,21 +32,32 @@ public class MessageResponder {
         if(message.startsWith("Guild > ") && RatAddons.responderToggle || message.startsWith("Party > ") && RatAddons.responderToggle) {
             if (message.toLowerCase().contains("@smiler"))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + ":)");
-            else if (message.toLowerCase().contains("@truer"))
+            if (message.toLowerCase().contains("@truer"))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "True!");
-            else if (message.toLowerCase().contains("@frowner"))
+            if (message.toLowerCase().contains("@frowner"))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + ":(");
-            else if (message.toLowerCase().contains("@samer"))
+            if (message.toLowerCase().contains("@samer"))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "Same!");
-            else if (message.toLowerCase().contains("i hate bingo"))
+            if (message.toLowerCase().contains("@yqner"))
+                Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "Yqne!");
+            if (message.toLowerCase().contains("i hate bingo"))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "I love bingo <3");
-            else if (message.contains("BennettArthur") && !message.contains("BennettArthur is my favorite mage") && !message.contains("] BennettArthur: "))
+            if (message.contains("BennettArthur") && !message.contains("BennettArthur is my favorite mage") && !message.contains("] BennettArthur: "))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "BennettArthur is my favorite mage <3");
-            else if (message.toLowerCase().contains("shut up"))
+            if (message.toLowerCase().contains("shut up"))
                 Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "no u");
+            if (message.toLowerCase().contains("@kat"))
+                Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "Guild Master <3_<3");
+            if (message.toLowerCase().contains("@kd"))
+                Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "kd5335 <3");
+            if (message.toLowerCase().contains("@sadge"))
+                Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "sadger :crying_cat_face:");
+            if (message.toLowerCase().contains("@guildmaster"))
+                Utils.mc.thePlayer.sendChatMessage("/" + message.split(" ", 0)[0] + " chat " + "kitty kat <3_<3");
+
         }
-        else if(message.startsWith("Party > ")) {
-            if(message.contains("@mute") || message.contains("@partybug") || Default.isPartyBug) {
+        if(message.startsWith("Party > ") || message.startsWith("From ")) {
+            if(message.contains("@mute") || message.contains("@partybug")) {
                 Utils.mc.thePlayer.sendChatMessage("/p mute");
                 send = true;
             }

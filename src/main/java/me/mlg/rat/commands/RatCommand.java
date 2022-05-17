@@ -70,14 +70,14 @@ public class RatCommand extends CommandBase {
 
             case "timer":
                 switch (args[1].toLowerCase()) {
-                    case "start":
+                    case "init":
                         try {
                             Timer.tick = Integer.parseInt(args[2]);
                         } catch (IllegalArgumentException exception) {
                             Utils.printErrorMessage("Illegal Argument");
                             break;
                         }
-                        Utils.printRatMessage("Started Timer of " + Timer.tick + "s");
+                        Utils.printRatMessage("Initialized Timer with " + Timer.tick + "s");
                         break;
                     case "reset":
 
@@ -133,6 +133,11 @@ public class RatCommand extends CommandBase {
                         RatAddons.seaCreatureLastHitToggle = !RatAddons.seaCreatureLastHitToggle;
                         ConfigHandler.writeBooleanConfig("toggle", "seacreaturelasthit", RatAddons.seaCreatureLastHitToggle);
                         Utils.printRatMessage("Toggled Sea Creature Last Hit to " + RatAddons.seaCreatureLastHitToggle);
+                        break;
+                    case "timer":
+                        RatAddons.timerToggle = !RatAddons.timerToggle;
+                        ConfigHandler.writeBooleanConfig("toggle", "timer", RatAddons.timerToggle);
+                        Utils.printRatMessage("Toggled Timer to " + RatAddons.timerToggle);
                         break;
                     case "watcher":
                         RatAddons.responderToggle = !RatAddons.responderToggle;
