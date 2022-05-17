@@ -19,15 +19,24 @@ public class Utils {
         mc.thePlayer.addChatMessage(new ChatComponentText(EnumChatFormatting.AQUA + "[RAT] " + EnumChatFormatting.GREEN + message));
     }
     public static String tickToTime(int tick) {
-        return new SimpleDateFormat("m:s").format(new Date(tick * 50L));
+        tick /= 20;
+        if(tick / 60 < 1)
+            return "" + tick;
+        else if(tick / 3600 < 1)
+            return tick / 60 + ":" + tick % 60;
+        else if(tick / 216000 < 1)
+            return tick / 3600 + ":" + tick % 3600 + ":" + tick % 60;
+        else if(tick / 5184000 < 1)
+            return tick / 216000 + ":" + tick % 216000 + ":" + tick % 3600 + ":" + tick % 60;
+        return null;
     }
     public static double getSkillLevel(long xp) {
         return (double) ((xp - 4000000) / 300000) + 50;
     }
-    public static void sendToWebhook(String message, String webhook) {}
+
     public static boolean isOnHypixel() {
         if(mc != null && mc.theWorld != null && !mc.isSingleplayer())
-            return mc.getCurrentServerData().serverIP.toLowerCase().contains("hypixel");
+            return mc.getCurrentServerData().serverIP.toLowerCase().contains("hypixel.net");
         else
             return false;
     }

@@ -235,6 +235,7 @@ public class ConfigHandler {
         LavaFishingLoot.y = initInt("position", "lavafishingloot-y", 0);
         Timer.x = initInt("position", "timer-x", 0);
         Timer.y = initInt("position", "timer-y", 0);
+        Timer.color = initInt("color", "timer", 0xFFFFFF);
         WatcherDisplay.x = initInt("position", "watcher-x", 0);
         WatcherDisplay.y = initInt("position", "watcher-y", 0);
     }
