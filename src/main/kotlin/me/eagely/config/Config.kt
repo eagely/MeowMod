@@ -1,6 +1,5 @@
 package me.eagely.config
 
-import gg.essential.elementa.utils.withIndex
 import gg.essential.vigilance.Vigilant
 import gg.essential.vigilance.data.Category
 import gg.essential.vigilance.data.Property
@@ -136,6 +135,56 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
 
     @Property(
         type = PropertyType.SWITCH,
+        name = "Kuudra Reparty",
+        description = "Reparties your Kuudra party to skip cooldown",
+        category = "Kuudra"
+    )
+    var kuudraReparty = false
+
+    @Property(
+        type = PropertyType.TEXT,
+        name = "Other Leader",
+        description = "Name of the other party leader, they must have the mod installed or manually do all the steps correctly. Not case sensitive",
+        category = "Kuudra"
+    )
+    var otherLeader = ""
+
+    @Property(
+        type = PropertyType.TEXT,
+        name = "Player that is entering with you",
+        description = "Not case sensitive",
+        category = "Kuudra"
+    )
+    var enterPlayer = ""
+
+    @Property(
+        type = PropertyType.TEXT,
+        name = "Player that is entering with the other leader",
+        description = "Not case sensitive",
+        category = "Kuudra"
+    )
+    var invitePlayer = ""
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Dropship Warning",
+        description = "Warns you when the dropship is about to drop the bomb",
+        category = "Kuudra"
+    )
+    var dropshipWarning = false
+
+    @Property(
+        type = PropertyType.SLIDER,
+        name = "When to warn",
+        description = "Amount of seconds before the dropship lands that you should be warned at",
+        category = "Kuudra",
+        min = 0,
+        max = 48
+    )
+    var dropshipWarnDelay = 5
+
+    @Property(
+        type = PropertyType.SWITCH,
         name = "Nice PB",
         description = "Says \"nice pb\" in chat when you get a new time pb in dungeons",
         category = "Dungeons"
@@ -158,6 +207,40 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
     )
     var dodgeList = false
 
+    @Property(
+        type = PropertyType.PERCENT_SLIDER,
+        name = "Title size",
+        description = "Change the size of the title display",
+        category = "Settings"
+    )
+    var titleScale = 1F
+
+    @Property(
+        type = PropertyType.SELECTOR,
+        name = "Title color",
+        description = "Change the color of the title display",
+        category = "Settings",
+        options = ["§0Black",
+            "§1Dark Blue",
+            "§2Dark Green",
+            "§3Dark Aqua",
+            "§4Dark Red",
+            "§5Dark Purple",
+            "§6Gold",
+            "§7Gray",
+            "§8Dark Gray",
+            "§9Blue",
+            "§aGreen",
+            "§bAqua",
+            "§cRed",
+            "§dLight Purple",
+            "§eYellow",
+            "§fWhite",
+            "§zSBA Chroma"
+        ]
+    )
+    var titleColor = 15
+
     fun init() {
         initialize()
         addDependency(javaClass.getDeclaredField("timerType"), javaClass.getDeclaredField("timer"))
@@ -165,6 +248,10 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
         addDependency(javaClass.getDeclaredField("guildGGMessage"), javaClass.getDeclaredField("guildGG"))
         addDependency(javaClass.getDeclaredField("nicePBMessage"), javaClass.getDeclaredField("nicePB"))
         addDependency(javaClass.getDeclaredField("guiCursorPositionJerryBoxOnly"), javaClass.getDeclaredField("guiCursorPosition"))
+        addDependency(javaClass.getDeclaredField("otherLeader"), javaClass.getDeclaredField("kuudraReparty"))
+        addDependency(javaClass.getDeclaredField("enterPlayer"), javaClass.getDeclaredField("kuudraReparty"))
+        addDependency(javaClass.getDeclaredField("invitePlayer"), javaClass.getDeclaredField("kuudraReparty"))
+        addDependency(javaClass.getDeclaredField("dropshipWarnDelay"), javaClass.getDeclaredField("dropshipWarning"))
 
         setCategoryDescription(
             "General",
