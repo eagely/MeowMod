@@ -12,7 +12,7 @@ import org.lwjgl.input.Mouse
 
 class Meow : ClientCommandBase("meow") {
     override fun getCommandUsage(sender: ICommandSender): String {
-        return "${MeowMod.CHAT_PREFIX} Usage: /meow [help/timer/xxx]"
+        return "${MeowMod.MEOW_PREFIX} Usage: /meow [help/timer/xxx]"
     }
 
     @Throws(CommandException::class)
@@ -25,14 +25,14 @@ class Meow : ClientCommandBase("meow") {
         when (args[0]) {
             "help" -> Minecraft.getMinecraft().thePlayer.addChatMessage(
                 ChatComponentText(
-                    "${MeowMod.CHAT_PREFIX} https://gist.github.com/eagely/8d903176e2a1a74ac898360fc8a56063"
+                    "${MeowMod.MEOW_PREFIX} https://gist.github.com/eagely/8d903176e2a1a74ac898360fc8a56063"
                 )
             )
             "setcursor" -> {
                 GuiCursorPosition.setPosition(Mouse.getX(), Mouse.getY())
                 Minecraft.getMinecraft().thePlayer.addChatMessage(
                     ChatComponentText(
-                        "${MeowMod.CHAT_PREFIX} Set your cursor position to X${GuiCursorPosition.getX()} Y${GuiCursorPosition.getY()}"
+                        "${MeowMod.MEOW_PREFIX} Set your cursor position to X${GuiCursorPosition.getX()} Y${GuiCursorPosition.getY()}"
                     )
                 )
             }

@@ -1,9 +1,10 @@
 package me.eagely
 
+import codes.som.anthony.koffee.modifiers.private
 import me.eagely.commands.Meow
 import me.eagely.config.Config
 import me.eagely.features.*
-import me.eagely.features.KuudraSplits.Companion.currentSplit
+import me.eagely.utils.Title
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.client.settings.KeyBinding
@@ -18,6 +19,7 @@ import net.minecraftforge.fml.common.gameevent.InputEvent
 import net.minecraftforge.fml.common.gameevent.TickEvent
 import org.lwjgl.input.Keyboard
 import java.io.File
+import kotlin.collections.ArrayDeque
 
 @Mod(
     modid = MeowMod.MOD_ID,
@@ -44,6 +46,9 @@ class MeowMod {
         MinecraftForge.EVENT_BUS.register(SeaCreatureKillTimer())
         MinecraftForge.EVENT_BUS.register(GuiCursorPosition())
         MinecraftForge.EVENT_BUS.register(KuudraSplits())
+        MinecraftForge.EVENT_BUS.register(KuudraReparty())
+        MinecraftForge.EVENT_BUS.register(DropshipWarning())
+        MinecraftForge.EVENT_BUS.register(Title())
         keyBinds.forEach(ClientRegistry::registerKeyBinding)
     }
 
@@ -59,31 +64,30 @@ class MeowMod {
             Minecraft.getMinecraft().displayGuiScreen(display)
             display = null
         }
-        if(queuedMessage != null && chatDelay == 0) {
-            Minecraft.getMinecraft().thePlayer.sendChatMessage(queuedMessage)
-            queuedMessage = null
+        if(queuedMessage.isNotEmpty() && chatDelay == 0) {
+            Minecraft.getMinecraft().thePlayer.sendChatMessage(queuedMessage.first())
+            queuedMessage.removeFirst()
             chatDelay = HYPIXEL_CHAT_DELAY
         }
-        if(KuudraSplits.currentSplit != - 1 && KuudraSplits.currentSplit < 5)
-            KuudraSplits.splits[currentSplit]++
         if(chatDelay > 0) chatDelay--
     }
 
     companion object {
         const val MOD_ID = "meowmod"
         const val MOD_NAME = "Meow Mod"
-        const val MOD_VERSION = "0.5"
-        const val CHAT_PREFIX = "§f[§bMEOW§f]"
+        const val MOD_VERSION = "0.5.1"
+        const val MEOW_PREFIX = "§f[§bMEOW§f]"
         const val ERROR = "§f[§bMEOW§f]&c"
-        const val HYPIXEL_CHAT_DELAY = 4
+        const val DROPSHIP_DELAY = 960
+        private const val HYPIXEL_CHAT_DELAY = 10
 
         val keyBinds = arrayOf(
             KeyBinding("Open Settings", Keyboard.KEY_NONE, "Meow Mod")
         )
 
         var display: GuiScreen? = null
-        var chatDelay = 0
-        private var queuedMessage: String? = null
+        private var chatDelay = 0
+        private var queuedMessage: ArrayDeque<String> = ArrayDeque()
 
         fun queueChatMessage(message: String) {
             if(chatDelay == 0) {
@@ -91,7 +95,7 @@ class MeowMod {
                 chatDelay = HYPIXEL_CHAT_DELAY
             }
             else
-                queuedMessage = message
+                queuedMessage.add(message)
         }
     }
 }
