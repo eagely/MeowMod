@@ -10,7 +10,7 @@ import kotlin.math.min
 
 class Title {
     companion object {
-        private var title = ""
+        private lateinit var title: String
         private var endTime: Long = 0
         fun draw(string: String, time: Int) {
             this.title = string
@@ -24,7 +24,7 @@ class Title {
         val width = Minecraft.getMinecraft().fontRendererObj.getStringWidth(title)
         val screenWidth = ScaledResolution(Minecraft.getMinecraft()).scaledWidth_double
         val screenHeight = ScaledResolution(Minecraft.getMinecraft()).scaledHeight_double
-        var scale = ((screenWidth - 100) * Config.titleScale * 10) / width
+        var scale: Double = ((screenWidth - 100) * Config.titleSize) / width
         scale = min(scale, 10.0)
         GlStateManager.pushMatrix()
         GlStateManager.translate((screenWidth / 2 - width * scale / 2), screenHeight / 2 - (4.5 * scale), 0.0)

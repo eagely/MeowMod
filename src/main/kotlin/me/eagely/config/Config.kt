@@ -12,7 +12,7 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
 
     @Property(
         type = PropertyType.SWITCH,
-        name = "Gui Cursor Position",
+        name = "Gui Cursor Position // DOESNT WORK RN",
         description = "Change where the cursor appears when you open a gui, to set the position put your cursor where you want it to be and run /meow setcursor",
         category = "General"
     )
@@ -24,24 +24,7 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
         description = "Only change the cursor position in jerry boxes",
         category = "General"
     )
-    var guiCursorPositionJerryBoxOnly = false
-
-    @Property(
-        type = PropertyType.SWITCH,
-        name = "Timer",
-        description = "Display a timer (run /rat timer for more info)",
-        category = "General"
-    )
-    var timer = false
-
-    @Property(
-        type = PropertyType.SELECTOR,
-        name = "Timer Type",
-        description = "Select the Type of timer",
-        category = "General",
-        options = ["Countdown", "Stopwatch"]
-    )
-    var timerType = 0
+    var jerryBoxOnly = false
 
     @Property(
         type = PropertyType.SWITCH,
@@ -52,28 +35,12 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
     var endstoneProtector = false
 
     @Property(
-        type = PropertyType.SWITCH,
-        name = "Endstone Protector Guild Party",
-        description = "Select if the message should be sent to guild as well",
-        category = "Bestiary"
-    )
-    var endstoneProtectorGuild = false
-
-    @Property(
         type = PropertyType.TEXT,
         name = "Endstone protector Message",
         description = "Enter the message to send",
         category = "Bestiary"
     )
     var endstoneProtectorMessage = "Stage 5 Endstone Protector, /p join or type 321"
-
-    @Property(
-        type = PropertyType.SWITCH,
-        name = "Copy Rare Drops",
-        description = "Copies Rare Drops to Clipboard",
-        category = "Chat"
-    )
-    var copyRareDrops = false
 
     @Property(
         type = PropertyType.SWITCH,
@@ -108,15 +75,6 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
     )
     var guildWelcomeMessage = "Welcome"
 
-
-    @Property(
-        type = PropertyType.SWITCH,
-        name = "Message Responder",
-        description = "Responds to chat messages UNFINISHED",
-        category = "Chat"
-    )
-    var messageResponder = false
-
     @Property(
         type = PropertyType.SWITCH,
         name = "Sea Creature Kill Timer",
@@ -127,16 +85,25 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
 
     @Property(
         type = PropertyType.SWITCH,
-        name = "Kuudra Splits",
-        description = "Timed splits for the Kuudra bossfight",
+        name = "Splits",
+        description = "Timed splits for every phase",
         category = "Kuudra"
     )
     var kuudraSplits = false
 
     @Property(
+        type = PropertyType.SELECTOR,
+        name = "When to show",
+        description = "When to show kuudra splits",
+        category = "Kuudra",
+        options = ["During run", "End of run", "Both"]
+    )
+    var kuudraSplitsShow = 0
+
+    @Property(
         type = PropertyType.SWITCH,
-        name = "Kuudra Reparty",
-        description = "Reparties your Kuudra party to skip cooldown",
+        name = "Reparty",
+        description = "Reparties your Kuudra party to skip cooldown. This will likely break if the other leader isnt using meowmod",
         category = "Kuudra"
     )
     var kuudraReparty = false
@@ -185,27 +152,91 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
 
     @Property(
         type = PropertyType.SWITCH,
-        name = "Nice PB",
-        description = "Says \"nice pb\" in chat when you get a new time pb in dungeons",
-        category = "Dungeons"
+        name = "Warn party",
+        description = "Warn the party in all chat about an incoming dropship",
+        category = "Kuudra"
     )
-    var nicePB = false
-
-    @Property(
-        type = PropertyType.TEXT,
-        name = "Nice PB Message",
-        description = "Enter the message to send",
-        category = "Dungeons"
-    )
-    var nicePBMessage = "nice pb"
+    var warnParty = false
 
     @Property(
         type = PropertyType.SWITCH,
-        name = "Dodge List",
-        description = "Kicks people who join via party finder using specified /dodgelist",
-        category = "Dungeons"
+        name = "Notifications",
+        description = "Show notifications for different kuudra phases and events",
+        category = "Kuudra"
     )
-    var dodgeList = false
+    var kuudraNotifications = false
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Supply Notification",
+        description = "[NPC] Elle: OMG! Great work collecting my supplies!",
+        category = "Kuudra"
+    )
+    var supplyNotification = true
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Ballista Notification",
+        description = "[NPC] Elle: Phew! The Ballista is finally ready! It should be strong enough to tank Kuudra's blows now!",
+        category = "Kuudra"
+    )
+    var ballistaNotification = true
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Blazes Spawned Notification",
+        description = "[NPC] Elle: Phew! The Ballista is finally ready! It should be strong enough to tank Kuudra's blows now!",
+        category = "Kuudra"
+    )
+    var blazesSpawnedNotification = true
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "All Fuel Notification",
+        description = "Player recovered a Fuel Cell and charged the Ballista! (x%)",
+        category = "Kuudra",
+    )
+    var allFuelNotification = true
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Last Fuel Notification",
+        description = "Player recovered a Fuel Cell and charged the Ballista! (100%)",
+        category = "Kuudra",
+    )
+    var lastFuelNotification = true
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Cannon Mount Notification",
+        description = "Player mounted a Cannon",
+        category = "Kuudra"
+    )
+    var cannonMountNotification = true
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Stun Notification",
+        description = "Player destroyed one of Kuudra's pods!",
+        category = "Kuudra"
+    )
+    var stunNotification = true
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Stun Kill Notification",
+        description = "[NPC] Elle: POW! SURELY THAT'S IT! I don't think he has any more in him!",
+        category = "Kuudra"
+    )
+    var stunKillNotification = true
+
+    @Property(
+        type = PropertyType.SWITCH,
+        name = "Kuudra Down Notification",
+        description = "[NPC] Elle: Good job everyone. A hard fought battle come to an end. Let's get out of here before we run into any more trouble!",
+        category = "Kuudra"
+    )
+    var kuudraDownNotification = true
 
     @Property(
         type = PropertyType.PERCENT_SLIDER,
@@ -213,7 +244,7 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
         description = "Change the size of the title display",
         category = "Settings"
     )
-    var titleScale = 1F
+    var titleSize = 1f
 
     @Property(
         type = PropertyType.SELECTOR,
@@ -243,15 +274,25 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
 
     fun init() {
         initialize()
-        addDependency(javaClass.getDeclaredField("timerType"), javaClass.getDeclaredField("timer"))
         addDependency(javaClass.getDeclaredField("guildWelcomeMessage"), javaClass.getDeclaredField("guildWelcome"))
         addDependency(javaClass.getDeclaredField("guildGGMessage"), javaClass.getDeclaredField("guildGG"))
-        addDependency(javaClass.getDeclaredField("nicePBMessage"), javaClass.getDeclaredField("nicePB"))
-        addDependency(javaClass.getDeclaredField("guiCursorPositionJerryBoxOnly"), javaClass.getDeclaredField("guiCursorPosition"))
+        addDependency(javaClass.getDeclaredField("jerryBoxOnly"), javaClass.getDeclaredField("guiCursorPosition"))
+        addDependency(javaClass.getDeclaredField("endstoneProtectorMessage"), javaClass.getDeclaredField("endstoneProtector"))
+        addDependency(javaClass.getDeclaredField("kuudraSplitsShow"), javaClass.getDeclaredField("kuudraSplits"))
         addDependency(javaClass.getDeclaredField("otherLeader"), javaClass.getDeclaredField("kuudraReparty"))
         addDependency(javaClass.getDeclaredField("enterPlayer"), javaClass.getDeclaredField("kuudraReparty"))
         addDependency(javaClass.getDeclaredField("invitePlayer"), javaClass.getDeclaredField("kuudraReparty"))
         addDependency(javaClass.getDeclaredField("dropshipWarnDelay"), javaClass.getDeclaredField("dropshipWarning"))
+        addDependency(javaClass.getDeclaredField("warnParty"), javaClass.getDeclaredField("dropshipWarning"))
+        addDependency(javaClass.getDeclaredField("supplyNotification"), javaClass.getDeclaredField("kuudraNotifications"))
+        addDependency(javaClass.getDeclaredField("ballistaNotification"), javaClass.getDeclaredField("kuudraNotifications"))
+        addDependency(javaClass.getDeclaredField("blazesSpawnedNotification"), javaClass.getDeclaredField("kuudraNotifications"))
+        addDependency(javaClass.getDeclaredField("allFuelNotification"), javaClass.getDeclaredField("kuudraNotifications"))
+        addDependency(javaClass.getDeclaredField("lastFuelNotification"), javaClass.getDeclaredField("kuudraNotifications"))
+        addDependency(javaClass.getDeclaredField("stunNotification"), javaClass.getDeclaredField("kuudraNotifications"))
+        addDependency(javaClass.getDeclaredField("cannonMountNotification"), javaClass.getDeclaredField("kuudraNotifications"))
+        addDependency(javaClass.getDeclaredField("stunKillNotification"), javaClass.getDeclaredField("kuudraNotifications"))
+        addDependency(javaClass.getDeclaredField("kuudraDownNotification"), javaClass.getDeclaredField("kuudraNotifications"))
 
         setCategoryDescription(
             "General",
@@ -271,11 +312,6 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
         setCategoryDescription(
             "Kuudra",
             "Kuudra related settings"
-        )
-
-        setCategoryDescription(
-            "Dungeons",
-            "Dungeon related settings"
         )
 
         setCategoryDescription(

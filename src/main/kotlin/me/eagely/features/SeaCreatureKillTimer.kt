@@ -26,16 +26,14 @@ class SeaCreatureKillTimer {
 
     @SubscribeEvent
     fun onChat(event: ClientChatReceivedEvent) {
-        if(event.type == 2.toByte()) return
+        if(!Config.seaCreatureKillTimer || event.type == 2.toByte()) return
         val message: String = StringUtils.stripControlCodes(event.message.unformattedText)
         if (message.contains(":")) return
 
-        if(Config.seaCreatureKillTimer) {
             when (message) {
                 "You have angered a legendary creature... Lord Jawbus has arrived" -> isJawbus = true
                 "You hear a massive rumble as Thunder emerges." -> isThunder = true
             }
-        }
     }
 
     @SubscribeEvent

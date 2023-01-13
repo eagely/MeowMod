@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "me.eagely.meowmod"
-version = "0.5.1"
+version = "1.0"
 
 // Toolchains:
 java {

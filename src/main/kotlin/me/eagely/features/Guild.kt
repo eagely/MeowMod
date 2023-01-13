@@ -14,8 +14,8 @@ class Guild {
         if (message.contains(":")) return
 
         if (Config.guildWelcome && message.endsWith(" joined the Guild!"))
-            MeowMod.queueChatMessage("/gc ${Config.guildWelcomeMessage}")
+            MeowMod.messageQueue.add("/gc ${Config.guildWelcomeMessage}")
         else if (Config.guildGG && message.startsWith("                   The Guild has "))
-            MeowMod.queueChatMessage("/gc ${Config.guildGGMessage}")
+            MeowMod.messageQueue.add("/gc ${Config.guildGGMessage}")
     }
 }
