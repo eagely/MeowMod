@@ -50,6 +50,7 @@ class MeowMod {
         MinecraftForge.EVENT_BUS.register(DropshipWarning())
         MinecraftForge.EVENT_BUS.register(Title())
         MinecraftForge.EVENT_BUS.register(KuudraNotifications())
+        MinecraftForge.EVENT_BUS.register(VanquisherAlert())
         keyBinds.forEach(ClientRegistry::registerKeyBinding)
     }
 
@@ -83,11 +84,11 @@ class MeowMod {
     companion object {
         const val MOD_ID = "meowmod"
         const val MOD_NAME = "Meow Mod"
-        const val MOD_VERSION = "1.0"
+        const val MOD_VERSION = "1.1"
         const val MEOW_PREFIX = "§f[§bMEOW§f]"
         const val ERROR_PREFIX = "§f[§bMEOW§f]&c"
         const val DROPSHIP_DELAY = 960
-        private const val HYPIXEL_CHAT_DELAY = 4
+        private const val HYPIXEL_CHAT_DELAY = 5
         private const val SAFE_HYPIXEL_CHAT_DELAY = 20
 
         val keyBinds = arrayOf(

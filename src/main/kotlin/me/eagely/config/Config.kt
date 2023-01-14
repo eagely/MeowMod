@@ -160,6 +160,14 @@ object Config : Vigilant(File("./config/meowmod/config.toml"), "MeowMod", sortin
 
     @Property(
         type = PropertyType.SWITCH,
+        name = "Vanquisher Alert",
+        description = "Sends an alert in party chat when you spawn a vanquisher",
+        category = "Kuudra"
+    )
+    var vanquisherAlert = false
+
+    @Property(
+        type = PropertyType.SWITCH,
         name = "Notifications",
         description = "Show notifications for different kuudra phases and events",
         category = "Kuudra"

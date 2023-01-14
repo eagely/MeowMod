@@ -39,12 +39,12 @@ class SeaCreatureKillTimer {
     @SubscribeEvent
     fun onEntityDeath(event: LivingDeathEvent) {
         if (isJawbus && event.entityLiving.name.equals("Iron Golem")) {
-            MeowMod.queueChatMessage("Lord Jawbus took " + tickSinceJawbus.toFloat() / 20 + "s to kill")
+            MeowMod.safeMessageQueue.add("Lord Jawbus took " + tickSinceJawbus.toFloat() / 20 + "s to kill")
             tickSinceJawbus = 0
             isJawbus = false
         }
         else if (isThunder && event.entityLiving.name.equals("Guardian")) {
-            MeowMod.queueChatMessage("Thunder took " + tickSinceThunder.toFloat() / 20 + "s to kill")
+            MeowMod.safeMessageQueue.add("Thunder took " + tickSinceThunder.toFloat() / 20 + "s to kill")
             tickSinceThunder = 0
             isThunder = false
         }
