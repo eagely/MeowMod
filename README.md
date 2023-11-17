@@ -13,9 +13,7 @@ MeowMod is a Forge 1.8.9 mod for Hypixel Skyblock that introduces a range of new
 ### Chat
 
     Guild GG: Sends a GG message when the guild levels up or completes a quest.
-    Guild GG Message: Enter the message to send.
     Guild Welcome: Sends a welcome message when someone joins the guild.
-    Guild Welcome Message: Enter the message to send.
 
 ### Fishing
 
