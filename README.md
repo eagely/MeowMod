@@ -1,4 +1,4 @@
-# MeowMod
+# MeowMod (UNMAINTAINED)
 
 ## Introduction
 MeowMod is a Forge 1.8.9 mod for Hypixel Skyblock that introduces a range of new features to enhance your gameplay experience.
